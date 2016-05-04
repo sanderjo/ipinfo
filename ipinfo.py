@@ -21,8 +21,29 @@ $ curl http://ipinfo.io/31.21.30.159/json
 
 import json
 import urllib
+import re
 baseurl = 'http://ipinfo.io/'    # no HTTPS supported (at least: not without a plan)
 
+
+
+def ispublic(ipaddress):
+    return not isprivate(ipaddress)
+
+def isprivate(ipaddress):
+
+    if ipaddress.startswith("::ffff:"): 
+        ipaddress=ipaddress.replace("::ffff:", "")
+
+    # IPv4 Regexp from https://stackoverflow.com/questions/30674845/
+    if re.search(r"^(?:10|127|172\.(?:1[6-9]|2[0-9]|3[01])|192\.168)\..*", ipaddress):
+        # Yes, so match, so a local or RFC1918 IPv4 address
+        return True
+
+    if ipaddress == "::1":
+        # Yes, IPv6 localhost
+        return True
+
+    return False
 
 
 def getall(ipaddress):
