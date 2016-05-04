@@ -16,3 +16,7 @@ US --- Google Inc.
 NL --- Xs4all Internet BV
 
 ```
+
+# Does it work for IPv6?
+
+Of course
