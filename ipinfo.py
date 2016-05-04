@@ -24,6 +24,7 @@ import urllib
 baseurl = 'http://ipinfo.io/'    # no HTTPS supported (at least: not without a plan)
 
 
+
 def getall(ipaddress):
     url = '%s%s/json' % (baseurl, ipaddress)
     try:
