@@ -73,9 +73,31 @@ def country_and_org_as_list(ipaddress):
     except:
         return ['','']
 
+def get_my_ipinfo():
+        url = '%sjson' % (baseurl)
+        # print("url is", url)
+        try:
+                urlresult = urllib.urlopen(url)
+                jsonresult = urlresult.read()
+                # print("jsonresult is", jsonresult)
+                parsedjson = json.loads(jsonresult)
+                return parsedjson
+        except:
+                return None
+
+def get_my_country():
+        allinfo = get_my_ipinfo() # get all info
+        try:
+                return allinfo['country'] # + ', ' + allinfo['org'].split(' ', 1)[1]
+        except:
+                return ""
+
 if __name__ == '__main__':
 
     # Some examples:
+
+    print "Info about you", get_my_ipinfo()
+    print "Your country:", get_my_country()
 
     print getall('31.21.30.159')
     print country_and_org('31.21.30.159')
